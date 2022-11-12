@@ -3,7 +3,6 @@
 ## Tasks
 
 - [ ] Auth <br />
-
       - [ ] Create Admin Sign up API <br />
       - [ ] Create Admin / Employee Login API <br />
       - [ ] Add email invite feature to invite employees <br />
