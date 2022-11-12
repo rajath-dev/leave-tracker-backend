@@ -2,9 +2,9 @@
 
 ## Tasks
 
-- [ ] Auth
+- [ ] Auth <br />
       - [ ] Create Admin Sign up API <br />
       - [ ] Create Admin / Employee Login API <br />
-      - [ ] Add email invite feature to invite employees
-      - [ ] Send emailId and temperory password to employees via invite email 
-      - [ ] Create reset password API for employees
+      - [ ] Add email invite feature to invite employees <br />
+      - [ ] Send emailId and temperory password to employees via invite email <br />
+      - [ ] Create reset password API for employees <br />
