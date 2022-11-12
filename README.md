@@ -1,3 +1,3 @@
 ## Leave tracker
 
-[ ] tasks
+- [ ] tasks
