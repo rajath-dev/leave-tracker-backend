@@ -1,8 +1,8 @@
 import { Schema, model} from 'mongoose';
-import { UserType } from 'src/helpers/enums.helper';
+import { UserType } from '../helpers/enums.helper';
 
 const userSchema = new Schema({
-  userName: {
+  username: {
     type: String,
     index: true,
     required: true
@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   roles: [
     {
-      type: UserType,
+      type: String,
       default: UserType.EMPLOYEE
     }
   ] 

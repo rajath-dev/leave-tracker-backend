@@ -1,18 +1,26 @@
 import express, {Response} from 'express';
 import cors from "cors";
 import mongoose from 'mongoose';
+import authRouter from './routers/auth.route';
+import dotnev from 'dotenv';
+
+dotnev.config();
 
 const app = express();
 const PORT = 4000;
 
 app.use(cors());
 
+app.use(express.json());
+
+app.use(process.env.BASE_API ?? '/', authRouter)
+
 app.get('/', (_, res:Response) => {
   res.json({message: 'Hello there!'});
 })
 
 async function connectDatabase() {
-  const mongoURI = "mongodb://127.0.0.1:27017/leaverTracker";
+  const mongoURI = process.env.MONGO_URI ?? '';
   await mongoose.connect(mongoURI);
   console.log("database connected");
 }
