@@ -1,7 +1,8 @@
-import express, {Response} from 'express';
+import express from 'express';
 import cors from "cors";
 import mongoose from 'mongoose';
 import authRouter from './routers/auth.route';
+import inviteRouter from './routers/invite.route';
 import dotnev from 'dotenv';
 
 dotnev.config();
@@ -14,10 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(process.env.BASE_API ?? '/', authRouter)
-
-app.get('/', (_, res:Response) => {
-  res.json({message: 'Hello there!'});
-})
+app.use(process.env.BASE_API ?? '/', inviteRouter)
 
 async function connectDatabase() {
   const mongoURI = process.env.MONGO_URI ?? '';
