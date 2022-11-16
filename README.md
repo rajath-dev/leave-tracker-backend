@@ -1,4 +1,4 @@
-### Leave tracker
+# Leave tracker
 
 ## Tasks
 

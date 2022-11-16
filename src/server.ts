@@ -14,8 +14,8 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(process.env.BASE_API ?? '/', authRouter)
-app.use(process.env.BASE_API ?? '/', inviteRouter)
+app.use(process.env.BASE_API ?? '/', authRouter);
+app.use(process.env.BASE_API ?? '/', inviteRouter);
 
 async function connectDatabase() {
   const mongoURI = process.env.MONGO_URI ?? '';
