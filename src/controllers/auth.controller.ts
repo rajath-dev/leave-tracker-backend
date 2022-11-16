@@ -5,7 +5,7 @@ import {
   findUserByEmail,
   findUserByEmailWithPasswordInRepsonse,
   hashPassword,
-} from "src/services/auth.service";
+} from "../services/auth.service";
 
 const registerUser = async (req: Request, res: Response) => {
   try {

@@ -1,5 +1,5 @@
 import { compare, hash } from "bcrypt";
-import { userModel } from "src/models/user.model";
+import { userModel } from "../models/user.model";
 
 const findUserByEmail = async (email: string) => {
   try {
