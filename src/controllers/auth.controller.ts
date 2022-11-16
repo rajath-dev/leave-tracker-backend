@@ -48,4 +48,12 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser, loginUser };
+const resetPassword = async (req: Request, res: Response) => {
+  try {
+    console.log("ok");
+  } catch (error: any) {
+    res.status(400).json({ message: error?.message || "Something went wrong" });
+  }
+};
+
+export { registerUser, loginUser, resetPassword };
