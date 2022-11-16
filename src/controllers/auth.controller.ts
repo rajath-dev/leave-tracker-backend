@@ -32,8 +32,6 @@ const loginUser = async (req:Request, res:Response) => {
     }
     res.status(400).json({ user: foundUser });
   } catch(error:any) {
-    console.log(error);
-    
     res.status(400).json({ message: error?.message || 'Something went wrong' });
   }
 }
