@@ -1,17 +1,15 @@
 import { compare, hash } from "bcrypt";
 import { userModel } from "../models/user.model";
 
-const findUserByEmail = async (email: string) => {
+const findUserByEmail = async (
+  email: string,
+  getPasswordInResponse = false
+) => {
   try {
+    if (getPasswordInResponse) {
+      return await userModel.findOne({ email }).select("+password");
+    }
     return await userModel.findOne({ email });
-  } catch (error) {
-    throw new Error("User not found");
-  }
-};
-
-const findUserByEmailWithPasswordInRepsonse = async (email: string) => {
-  try {
-    return await userModel.findOne({ email }).select("+password");
   } catch (error) {
     throw new Error("User not found");
   }
@@ -36,9 +34,4 @@ const comparePassword = async (
   }
 };
 
-export {
-  findUserByEmail,
-  findUserByEmailWithPasswordInRepsonse,
-  comparePassword,
-  hashPassword,
-};
+export { findUserByEmail, comparePassword, hashPassword };

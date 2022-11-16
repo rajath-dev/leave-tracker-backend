@@ -3,7 +3,6 @@ import { userModel } from "../models/user.model";
 import {
   comparePassword,
   findUserByEmail,
-  findUserByEmailWithPasswordInRepsonse,
   hashPassword,
 } from "../services/auth.service";
 
@@ -37,7 +36,7 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const foundUser = await findUserByEmailWithPasswordInRepsonse(email);
+    const foundUser = await findUserByEmail(email, true);
     if (foundUser) {
       await comparePassword(password, foundUser.password);
       res.status(200).json({ user: foundUser });
@@ -50,7 +49,7 @@ const loginUser = async (req: Request, res: Response) => {
 const resetPassword = async (req: Request, res: Response) => {
   try {
     const { email, oldPassword, newPassword } = req.body;
-    const foundUser = await findUserByEmailWithPasswordInRepsonse(email);
+    const foundUser = await findUserByEmail(email, true);
 
     if (foundUser) {
       const isOldPasswordValid = await comparePassword(
