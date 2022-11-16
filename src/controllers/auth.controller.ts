@@ -73,4 +73,9 @@ const resetPassword = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser, loginUser, resetPassword };
+const logoutUser = async (_: Request, res: Response) => {
+  //TODO: remove JWT
+  res.status(200).json({ message: "Logged out" });
+};
+
+export { registerUser, loginUser, resetPassword, logoutUser };
