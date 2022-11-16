@@ -24,6 +24,8 @@ const registerUser = async (req: Request, res: Response) => {
     });
     res.status(201).json(user);
   } catch (error: any) {
+    console.log(error);
+
     res.status(400).json(error.message);
   }
 };
@@ -32,7 +34,7 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const foundUser = await userModel.findOne({ email });
+    const foundUser = await userModel.findOne({ email }).select("+password");
     if (!foundUser) {
       throw new Error("User not found");
     }
@@ -42,7 +44,7 @@ const loginUser = async (req: Request, res: Response) => {
       throw new Error("Invalid Password");
     }
 
-    res.status(400).json({ user: foundUser });
+    res.status(200).json({ user: foundUser });
   } catch (error: any) {
     res.status(400).json({ message: error?.message || "Something went wrong" });
   }
@@ -50,7 +52,22 @@ const loginUser = async (req: Request, res: Response) => {
 
 const resetPassword = async (req: Request, res: Response) => {
   try {
-    console.log("ok");
+    const { email, oldPassword, newPassword } = req.body;
+    const foundUser = await userModel.findOne({ email }).select("+password");
+    if (!foundUser) {
+      throw new Error("User not found");
+    }
+
+    const isOldPasswordValid = await compare(oldPassword, foundUser.password);
+    if (!isOldPasswordValid) {
+      throw new Error("Please enter correct old password");
+    }
+
+    const hashedPassword = await hash(newPassword, 10);
+    if (hashedPassword) {
+      await userModel.updateOne({ password: hashedPassword });
+      res.status(400).json({ message: "Successfully updated password" });
+    }
   } catch (error: any) {
     res.status(400).json({ message: error?.message || "Something went wrong" });
   }
